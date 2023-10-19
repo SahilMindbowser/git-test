@@ -1,0 +1,61 @@
+import * as React from 'react';
+import {cva, type VariantProps} from 'class-variance-authority';
+
+import {cn} from '../../lib/utils';
+
+const buttonVariants = cva(
+  'text-center flex justify-center items-center uppercase font-bold space-x-2',
+  {
+    variants: {
+      variant: {
+        primary: 'bg-[#455CD6] text-white',
+        secondary: 'bg-none text-black border border-black',
+        tertiary: 'bg-white underline',
+        unstyled: '',
+      },
+      disabled: {true: 'opacity-20 cursor-not-allowed', false: ''},
+      size: {
+        sm: 'h-10 w-max p-5 rounded-[100px] text-[12px]',
+        lg: 'h-[50px] w-max px-8 py-5 gap-2.5 text-[14px] rounded-[100px]',
+      },
+    },
+    defaultVariants: {
+      variant: 'primary',
+      size: 'sm',
+    },
+  },
+);
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  label: string;
+  icon?: React.ReactNode;
+  disabled?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {className, variant, size, label, icon, disabled = false, ...props},
+    ref,
+  ) => {
+    const isDisabledAndPrimary = disabled && variant === 'primary';
+    return (
+      <button
+        type="button"
+        className={cn(
+          buttonVariants({variant, disabled, size, className}),
+          isDisabledAndPrimary ? 'bg-[#D1D1D1] text-black opacity-100' : '',
+        )}
+        disabled={disabled}
+        {...props}
+      >
+        {label}
+        {icon && <span className="sm:h-3 sm:w-3 lg:h-5 lg:w-5"></span>}
+      </button>
+    );
+  },
+);
+Button.displayName = 'Button';
+
+export {Button, buttonVariants};
