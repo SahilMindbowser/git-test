@@ -1,0 +1,73 @@
+import type {Meta, StoryObj} from '@storybook/react';
+
+import {Button} from '../app/components/ui/button';
+
+// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+const meta = {
+  title: 'Components/Button',
+  component: Button,
+  parameters: {
+    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/react/configure/story-layout
+    layout: 'centered',
+  },
+  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
+  tags: ['autodocs'],
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  argTypes: {},
+} satisfies Meta<typeof Button>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+export const Primary: Story = {
+  args: {
+    variant: 'primary',
+    label: 'Primary Button',
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    variant: 'secondary',
+    label: 'Secondary Button',
+  },
+};
+
+export const Tertiary: Story = {
+  args: {
+    variant: 'tertiary',
+    label: 'Tertiary Button',
+  },
+};
+
+export const Unstyled: Story = {
+  args: {
+    variant: 'unstyled',
+    label: 'Unstyled Button',
+  },
+};
+
+export const PrimaryDisabled: Story = {
+  args: {
+    variant: 'primary',
+    label: 'Primary Button',
+    disabled: true,
+  },
+};
+
+export const SecondaryDisabled: Story = {
+  args: {
+    variant: 'secondary',
+    label: 'Secondary Button',
+    disabled: true,
+  },
+};
+
+export const TertiaryDisabled: Story = {
+  args: {
+    variant: 'tertiary',
+    label: 'Tertiary Button',
+    disabled: true,
+  },
+};
